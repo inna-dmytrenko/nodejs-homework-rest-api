@@ -1,4 +1,5 @@
-const { NotFound, BadRequest } = require('http-errors')
+const { BadRequest } = require('http-errors')
+// const { NotFound } = require('http-errors')
 // const bcript = require('bcryptjs')
 // const jwt = require('jsonwebtoken')
 const { User } = require('../../models')
@@ -7,6 +8,7 @@ const { User } = require('../../models')
 const loginAuth = async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email }, '_id email password')
+  console.log(user)
   if (!user || !user.comparePassword(password)) {
     throw new BadRequest('Email or password is wrong')
   }

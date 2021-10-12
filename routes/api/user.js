@@ -4,6 +4,7 @@ const router = express.Router()
 
 const { joiSchema } = require('../../models/users')
 const ctrl = require('../../controllers/auth/index')
+
 const {
   controllerWrapper,
   validation,
@@ -28,5 +29,14 @@ router.post('/login', validation(joiSchema), controllerWrapper(ctrl.loginAuth))
 
 router.get('/logout', authenticate, controllerWrapper(ctrl.logoutAuth))
 // router.get('/signuot')
+router.get(
+  '/current',
+  authenticate,
+  validation(joiSchema),
+  controllerWrapper(ctrl.currentUser),
+)
+// router.get('/signuot')
+
+router.get('/contacts', authenticate, controllerWrapper(ctrl.favoriteContacts))
 
 module.exports = router
