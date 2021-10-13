@@ -31,6 +31,10 @@ const contactSchema = Schema(
       require: [true, 'Set phone for contact'],
     },
     favorite: { type: Boolean, trim: true },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
   },
   { versionKey: false, timestamps: true },
 )
@@ -40,6 +44,7 @@ const joiSchema = Joi.object({
   email: Joi.string().email().required(),
   phone: Joi.string().length(10).pattern(phoneRegexp).required(),
   favorite: Joi.boolean().default(false),
+  // owner: Joi.required(),
 })
 
 const updateFavoriteSchema = Joi.object({
