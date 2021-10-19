@@ -4,13 +4,10 @@ require('dotenv').config()
 const app = require('../app')
 // console.log(process.env)
 // const PORT = process.env.PORT || 3000
-const { DB_HOST, PORT = 3000 } = process.env
+const { DB_HOST, PORT = 4040 } = process.env
 
 mongoose
-  .connect(DB_HOST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DB_HOST)
   .then(() =>
     app.listen(PORT, () => {
       console.log('Database connection successful')
