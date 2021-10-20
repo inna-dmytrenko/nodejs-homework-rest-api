@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const Joi = require('joi')
 const bcript = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const gravatar = require('gravatar')
 
 const userSchema = Schema(
   {
@@ -23,6 +24,17 @@ const userSchema = Schema(
     token: {
       type: String,
       default: null,
+    },
+    avatarURL: {
+      type: String,
+      default: function () {
+        return gravatar.url(this.email, {
+          d: 'retro',
+          protocol: 'http',
+          format: 'qr',
+          s: '250',
+        })
+      },
     },
   },
   { versionKey: false, timestamps: true },
@@ -47,6 +59,7 @@ const joiSchema = Joi.object({
   email: Joi.string().email().required(),
   subscription: Joi.string(),
   owner: Joi.string().min(1),
+  avatarURL: Joi.string(),
 })
 const User = model('user', userSchema)
 module.exports = { joiSchema, User }
