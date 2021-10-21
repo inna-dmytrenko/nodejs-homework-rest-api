@@ -7,10 +7,13 @@ const { User } = require('../../models')
 
 const loginAuth = async (req, res) => {
   const { email, password } = req.body
-  const user = await User.findOne({ email }, '_id email password')
+  const user = await User.findOne({ email }, '_id email password verify')
   console.log(user)
   if (!user || !user.comparePassword(password)) {
     throw new BadRequest('Email or password is wrong')
+  }
+  if (!user.verify) {
+    throw new BadRequest('User not found')
   }
   //   if (!user) {
   //     throw new NotFound(`Email ${email} is wrong`)
