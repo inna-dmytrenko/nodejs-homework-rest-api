@@ -4,6 +4,8 @@ const logoutAuth = require('./logoutAuth')
 const currentUser = require('./currentUser')
 const favoriteContacts = require('./favoriteContacts')
 const { updateAvatar } = require('./avatarUser.js')
+const verifyUser = require('./verifyUser')
+const reVerifyUser = require('./reVerifyUser')
 
 module.exports = {
   registerAuth,
@@ -12,4 +14,6 @@ module.exports = {
   currentUser,
   favoriteContacts,
   updateAvatar,
+  verifyUser,
+  reVerifyUser,
 }
