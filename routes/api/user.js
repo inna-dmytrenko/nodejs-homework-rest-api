@@ -70,3 +70,4 @@ router.get('/contacts', authenticate, controllerWrapper(ctrl.favoriteContacts))
 router.patch('/avatars', authenticate, uploadMiddleware, updateAvatar)
 
 module.exports = router
+// module.exports = router
