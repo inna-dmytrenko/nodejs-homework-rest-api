@@ -38,11 +38,12 @@ const loginAuth = async (req, res) => {
   //   }
   //   const token = jwt.sign(payload, SECRET_KEY)
   const token = user.createToken()
-  await User.findByIdAndUpdate(user._id, { token })
+  await User.findByIdAndUpdate(user._id, { email, token })
   res.json({
     status: 'success',
     code: 200,
     data: {
+      email,
       token,
     },
   })
